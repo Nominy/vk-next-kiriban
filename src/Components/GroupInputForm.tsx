@@ -25,8 +25,7 @@ const GroupInputForm = () => {
         setIsAddButtonDisabled(true);
     };
 
-    const fixInput = (e: React.FormEvent<HTMLFormElement>, inputValue: string) => {
-        e.preventDefault()
+    const fixInput = () => {
         switch (appState) {
             case ApplicationState.Disabled:
                 setFixedInputValue(inputValue);
@@ -72,10 +71,8 @@ const GroupInputForm = () => {
     
     
     return (<>
-            <form onSubmit={(e) => fixInput(e, inputValue)}>
-                <input type="text" value={inputValue} onChange={handleInput}/>
-                <button type="submit">Submit</button>
-            </form>
+            <input type="text" value={inputValue} onChange={handleInput}/>
+            <button onClick={fixInput}>Submit</button>
             {Boolean(currentGroup.value) ? <p>{currentGroup.key} | {currentGroup.value}</p> : <p>Enter Valid Group!</p>}
             <button onClick={addGroup} disabled={isAddButtonDisabled}>
                 Add
