@@ -15,13 +15,16 @@ function isButtonDisabled(currGroup: APIValue, data: Array<APIValue>): boolean {
     );
     return keyEmpty || valueEmpty || valueError || groupAlreadyThere;
 }
+
+
 const GroupInputControl = () => {
     const initial_Group: APIValue = {key: "", value: 0};
 
     const [currentGroup, setCurrentGroup] = useState<APIValue>(initial_Group);
     const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
     const [fixedInputValue, setFixedInputValue] = useState("");
-    const [inputGroupNameValue, setInputGroupNameValue] = useState("")
+    const [inputGroupNameValue, setInputGroupNameValue] = useState("");
+    const [inputMembersCountGoal, setInputMembersCountGoal] = useState<number | null>(null);
 
     const { data, setData } = useContext(dataContext)
     const { appState, intervalId, setAppState } = useContext(loopContext)
@@ -33,7 +36,8 @@ const GroupInputControl = () => {
         setIsAddButtonDisabled(true);
     };
 
-    const fixInput = () => {
+    const fixInput = (e: React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
         switch (appState) {
             case ApplicationState.Disabled:
                 setFixedInputValue(inputGroupNameValue);
@@ -75,8 +79,14 @@ const GroupInputControl = () => {
     return (<>
             <form onSubmit={fixInput}>
                 <TextInput label="Group Name: " 
+                type="text"
                 value={inputGroupNameValue} 
                 onChange={(value: string) => {setInputGroupNameValue(value)}}/>
+                <TextInput label="Members Count Goal: "
+                type="number"
+                value={inputMembersCountGoal}
+                onChange={(value: number) => setInputMembersCountGoal(value)}/>
+                <button type="submit">Submit</button>
             </form>
             {Boolean(currentGroup.value) ? <p>{currentGroup.key} | {currentGroup.value}</p> : <p>Enter Valid Group!</p>}
             <button onClick={addGroup} disabled={isAddButtonDisabled}>
@@ -85,5 +95,6 @@ const GroupInputControl = () => {
         </>
     )
 }
+
 
 export default GroupInputControl;

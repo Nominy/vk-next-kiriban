@@ -13,8 +13,6 @@ export const GroupTableControl = () => {
         setData(newData);
     };
 
-
-
     useEffect(() => {
         return () => {
             if (intervalId !== null) {
