@@ -3,12 +3,8 @@ import { APIValue } from "../../types";
 import { dataContext, loopContext } from "@/Components/Context";
 import { ApplicationState } from "@/Components/LoopButton";
 import { fetchData } from "@/lib/api";
-import GroupInputForm from "@/Components/GroupInputForm";
+import TextInput from "./TextInput";
 
-interface FormData {
-    GroupName: string;
-    MembersCountGoal: number;
-}
 
 function isButtonDisabled(currGroup: APIValue, data: Array<APIValue>): boolean {
     const keyEmpty = !currGroup.key;
@@ -25,6 +21,7 @@ const GroupInputControl = () => {
     const [currentGroup, setCurrentGroup] = useState<APIValue>(initial_Group);
     const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
     const [fixedInputValue, setFixedInputValue] = useState("");
+    const [inputGroupNameValue, setInputGroupNameValue] = useState("")
 
     const { data, setData } = useContext(dataContext)
     const { appState, intervalId, setAppState } = useContext(loopContext)
@@ -36,7 +33,7 @@ const GroupInputControl = () => {
         setIsAddButtonDisabled(true);
     };
 
-    const fixInput = (formData: FormData) => {
+    const fixInput = () => {
         switch (appState) {
             case ApplicationState.Disabled:
                 setFixedInputValue(inputGroupNameValue);
@@ -76,10 +73,11 @@ const GroupInputControl = () => {
     
     
     return (<>
-            <GroupInputForm onSubmit={fixInput}>
-                <input type={"text"} name={"GroupName"}/>
-                <input type={"number"} name={"MembersCountGoal"}/>
-            </GroupInputForm>
+            <form onSubmit={fixInput}>
+                <TextInput label="Group Name: " 
+                value={inputGroupNameValue} 
+                onChange={(value: string) => {setInputGroupNameValue(value)}}/>
+            </form>
             {Boolean(currentGroup.value) ? <p>{currentGroup.key} | {currentGroup.value}</p> : <p>Enter Valid Group!</p>}
             <button onClick={addGroup} disabled={isAddButtonDisabled}>
                 Add
