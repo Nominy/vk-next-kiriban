@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ApplicationState } from "@/Components/LoopButton";
 import ReactModal from 'react-modal';
-import GroupInputForm from '@/Components/GroupInputForm';
+import GroupInputControl from '@/Components/GroupInputControl';
 import { dataContext, loopContext } from "@/Components/Context";
 import { GroupTableControl } from "@/Components/GroupTableControl";
 
@@ -25,7 +25,7 @@ export default function Home() {
         <>
             <loopContext.Provider value={{intervalId, setIntervalId, appState, setAppState} }>
             <dataContext.Provider value={{data, setData}}>
-                <GroupInputForm />
+                <GroupInputControl />
                 <GroupTableControl/>
             </dataContext.Provider>
             </loopContext.Provider>
