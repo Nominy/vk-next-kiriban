@@ -6,7 +6,6 @@ const vk = new VK({
 });
 
 interface UsersCount {
-  key: string;
   value: string | number;
 }
 
@@ -21,18 +20,15 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
         fields: ['members_count'],
       });
       usersCount = {
-        key: response[0].screen_name!,
-        value: response[0].members_count,
+        value: response[0].members_count
       };
     } catch (err) {
       usersCount = {
-        key: group,
         value: 'Error',
       };
     }
   } else {
     usersCount = {
-      key: 'No group specified',
       value: '',
     };
   }

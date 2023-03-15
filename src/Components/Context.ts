@@ -1,10 +1,10 @@
-import {createContext, Dispatch, SetStateAction} from "react";
-import {APIValue} from "../../types";
-import {ApplicationState} from "@/Components/LoopButton";
+import { createContext, Dispatch, SetStateAction } from "react";
+import { VKGroup } from "../../types";
+import { ApplicationState } from "@/Components/LoopButton";
 
 type dataContextType = {
-    data: Array<APIValue>;
-    setData: Dispatch<SetStateAction<APIValue[]>>;
+    data: Array<VKGroup>;
+    setData: Dispatch<SetStateAction<VKGroup[]>>;
 }
 
 type loopContextType = {

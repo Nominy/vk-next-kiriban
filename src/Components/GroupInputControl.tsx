@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { APIValue } from "../../types";
+import { VKGroup } from "../../types";
 import { dataContext, loopContext } from "@/Components/Context";
 import { ApplicationState } from "@/Components/LoopButton";
 import { fetchData } from "@/lib/api";
 import TextInput from "./TextInput";
 
 
-function isButtonDisabled(currGroup: APIValue, data: Array<APIValue>): boolean {
+function isButtonDisabled(currGroup: VKGroup, data: Array<VKGroup>): boolean {
     const keyEmpty = !currGroup.key;
     const valueEmpty = !currGroup.value;
     const valueError = currGroup.value === "Error";
@@ -18,11 +18,11 @@ function isButtonDisabled(currGroup: APIValue, data: Array<APIValue>): boolean {
 
 
 const GroupInputControl = () => {
-    const initial_Group: APIValue = {key: "", value: 0};
+    const initial_Group: VKGroup = {key: "", value: 0, membersGoal: 0};
 
-    const [currentGroup, setCurrentGroup] = useState<APIValue>(initial_Group);
+    const [currentGroup, setCurrentGroup] = useState<VKGroup>(initial_Group);
     const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
-    const [fixedInputValue, setFixedInputValue] = useState("");
+    const [fixedInputValue, setFixedInputValue] = useState<VKGroup>(initial_Group);
     const [inputGroupNameValue, setInputGroupNameValue] = useState("");
     const [inputMembersCountGoal, setInputMembersCountGoal] = useState<number | null>(null);
 
@@ -31,7 +31,7 @@ const GroupInputControl = () => {
     const addGroup = () => {
         setData([...data, currentGroup]);
         setCurrentGroup(initial_Group);
-        setFixedInputValue('');
+        setFixedInputValue(initial_Group);
 
         setIsAddButtonDisabled(true);
     };
@@ -40,10 +40,10 @@ const GroupInputControl = () => {
         e.preventDefault()
         switch (appState) {
             case ApplicationState.Disabled:
-                setFixedInputValue(inputGroupNameValue);
+                setFixedInputValue({key: inputGroupNameValue, value: 0, membersGoal: inputMembersCountGoal as number});
                 break;
             case ApplicationState.Enabled:
-                setFixedInputValue(inputGroupNameValue);
+                setFixedInputValue({key: inputGroupNameValue, value: 0, membersGoal: inputMembersCountGoal as number});
                 break;
             case ApplicationState.Stop:
                 break;
@@ -54,10 +54,15 @@ const GroupInputControl = () => {
 
 
     useEffect(() => {
-        fetchData(fixedInputValue)
+        fetchData(fixedInputValue?.key as string)
             .then((currGroup) => {
-                setCurrentGroup(currGroup);
-                const ButtonDisabled = isButtonDisabled(currGroup, data);
+                const newGroup = {
+                    key: fixedInputValue.key,
+                    value: currGroup.value,
+                    membersGoal: fixedInputValue.membersGoal
+                }
+                setCurrentGroup(newGroup);
+                const ButtonDisabled = isButtonDisabled(newGroup, data);
                 setIsAddButtonDisabled(ButtonDisabled);
             })
             .catch(() => {
@@ -88,7 +93,7 @@ const GroupInputControl = () => {
                 onChange={(value: number) => setInputMembersCountGoal(value)}/>
                 <button type="submit">Submit</button>
             </form>
-            {Boolean(currentGroup.value) ? <p>{currentGroup.key} | {currentGroup.value}</p> : <p>Enter Valid Group!</p>}
+            {Boolean(currentGroup.value) ? <p>{currentGroup.key} | {currentGroup.value} | {currentGroup.membersGoal}</p> : <p>Enter Valid Group!</p>}
             <button onClick={addGroup} disabled={isAddButtonDisabled}>
                 Add
             </button>

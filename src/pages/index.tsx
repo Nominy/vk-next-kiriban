@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 import GroupInputControl from '@/Components/GroupInputControl';
 import { dataContext, loopContext } from "@/Components/Context";
 import { GroupTableControl } from "@/Components/GroupTableControl";
+import {VKGroup} from "../../types";
 
 type APIValue = {
     key: string;
@@ -11,7 +12,7 @@ type APIValue = {
 }
 
 export default function Home() {
-    const [data, setData] = useState<APIValue[]>([]);
+    const [data, setData] = useState<VKGroup[]>([]);
     const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
     const [appState, setAppState] = useState<ApplicationState>(ApplicationState.Disabled);
     const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ export default function Home() {
             <loopContext.Provider value={{intervalId, setIntervalId, appState, setAppState} }>
             <dataContext.Provider value={{data, setData}}>
                 <GroupInputControl />
-                <GroupTableControl/>
+                <GroupTableControl />
             </dataContext.Provider>
             </loopContext.Provider>
             <ReactModal

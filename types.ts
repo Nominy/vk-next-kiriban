@@ -1,6 +1,5 @@
-import React from "react";
-
-export type APIValue = {
+export type VKGroup = {
     key: string;
     value: number | string;
+    membersGoal: number;
 };
