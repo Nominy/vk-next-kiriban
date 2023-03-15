@@ -1,0 +1,29 @@
+body {
+  background-color: #1a1a1a;
+  color: #d1d1d1;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button {
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #0070f3;
+  color: #d1d1d1;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #005fcc;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
