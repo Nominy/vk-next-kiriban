@@ -22,7 +22,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ onSubmit }) => {
     };
 
     return (
-        <>
+        <div className={styles["group-input"]}>
             <form className={styles['groupForm']} onSubmit={handleInputSubmit}>
                     <TextInput
                         label="Enter group name: "
@@ -40,7 +40,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ onSubmit }) => {
                     />
                 <button className="group-form__submit" type="submit">Submit</button>
             </form>
-        </>
+        </div>
     );
 };
 

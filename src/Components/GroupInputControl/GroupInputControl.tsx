@@ -66,11 +66,15 @@ const GroupInputControl = () => {
 
 
     return (
-        <>
-            <GroupInput onSubmit={handleInputSubmit} />
-            <GroupDisplay group={currentGroup}/>
-            <GroupAddButton group={currentGroup} disabled={isAddButtonDisabled} onAdd={handleAddClick}/>
-        </>
+        <div className={styles['group-input-control']}>
+            <div>
+                <GroupInput onSubmit={handleInputSubmit} />
+            </div>
+            <div>
+                <GroupDisplay group={currentGroup}/>
+                <GroupAddButton group={currentGroup} disabled={isAddButtonDisabled} onAdd={handleAddClick}/>
+            </div>
+        </div>
     );
 }
 

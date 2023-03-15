@@ -1,0 +1,15 @@
+.group-input-control {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  & > div:first-child {
+    grid-column: 1;
+    justify-self: end;
+  }
+
+  & > div:last-child{
+    display: flex;
+    max-width: 50%;
+    flex-direction: column;
+  }
+}

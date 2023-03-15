@@ -1,0 +1,9 @@
+@import "./src/styles/variables.scss";
+
+.group-add-button{
+  display: flex;
+  button {
+    border-radius: 0 0 4px 4px;
+    flex: 1 1 auto;
+  }
+}

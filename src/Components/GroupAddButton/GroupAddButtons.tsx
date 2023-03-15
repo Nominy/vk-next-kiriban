@@ -1,6 +1,7 @@
 import {VKGroup} from "../../../types";
 import React, {useContext} from "react";
 import {dataContext} from "@/Components/Context";
+import styles from "./GroupAddButton.module.scss"
 
 interface GroupAddButtonProps {
     group: VKGroup;
@@ -16,11 +17,11 @@ const GroupAddButton: React.FC<GroupAddButtonProps> = ({ group, disabled, onAdd 
         onAdd();
     };
 
-    return (
-            <button onClick={handleAddClick} disabled={disabled}>
-            Add
-            </button>
-    );
+    return (<div className={styles['group-add-button']}>
+                <button onClick={handleAddClick} disabled={disabled}>
+                    Add
+                </button>
+            </div>);
 };
 
 export default GroupAddButton;
