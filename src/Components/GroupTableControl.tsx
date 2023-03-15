@@ -68,7 +68,7 @@ export const GroupTableControl = () => {
                 <ul>
                     {data.map((item) => (
                         <li key={item.key}>
-                            {item.key}: {item.value}
+                            {item.key} | {item.value} | {item.membersGoal}
                             <button disabled={Boolean(intervalId)} onClick={() => {
                                 deleteGroup(item.key)
                             }}>Delete
