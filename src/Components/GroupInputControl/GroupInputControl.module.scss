@@ -3,14 +3,15 @@
   grid-template-columns: repeat(2, 1fr);
 
   & > div:first-child {
+    margin-right: 1%;
     grid-column: 1;
     justify-self: end;
   }
 
   & > div:last-child {
+    margin-left: 1%;
     display: flex;
     width: max-content;
     flex-direction: column;
-    margin-left: 0.5%;
   }
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import ReactMarkdown from "react-markdown";
-import Modal from "react-modal";
+import ReactModal from "react-modal";
 
 type PopupProps = {
     isOpen: boolean;
@@ -15,11 +14,33 @@ const Popup = ({ isOpen, onClose, content }: PopupProps) => {
         appElementRef.current = document.getElementById("__next");
     }, []);
 
+    const ModalStyles = {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1000,
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            transform: 'translate(-50%, -50%)',
+            padding: '2rem',
+            border: 'none',
+            borderRadius: '10px',
+            backgroundColor: '#252525',
+            boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
+            fontFamily: 'Arial, sans-serif',
+            color: '#fff',
+        },
+    };
+
+
     return (
-        <Modal isOpen={isOpen} onRequestClose={onClose} appElement={appElementRef.current!}>
-            <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactModal isOpen={isOpen} onRequestClose={onClose} appElement={appElementRef.current!} style={ModalStyles}>
+            <p>{content}</p>
             <button onClick={onClose}>Close</button>
-        </Modal>
+        </ReactModal>
     );
 };
 

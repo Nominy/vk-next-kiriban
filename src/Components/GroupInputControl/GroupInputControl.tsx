@@ -28,8 +28,8 @@ const GroupInputControl = () => {
     const [currentGroup, setCurrentGroup] = useState<VKGroup>(initialGroup);
     const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
 
-    const { appState, intervalId, setAppState } = useContext(loopContext);
-    const { data, setData } = useContext(dataContext);
+    const { intervalId, setAppState } = useContext(loopContext);
+    const { data } = useContext(dataContext);
 
     const fetchGroupData = async (group: VKGroup) => {
         try {
@@ -55,14 +55,7 @@ const GroupInputControl = () => {
         setIsAddButtonDisabled(true);
     };
 
-    useEffect(() => {
-        if (Boolean(intervalId))
-            setAppState(ApplicationState.Stop);
-        else if (data.length > 0)
-            setAppState(ApplicationState.Enabled);
-        else
-            setAppState(ApplicationState.Disabled);
-    }, [data, intervalId, setAppState])
+
 
 
     return (

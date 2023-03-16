@@ -12,7 +12,7 @@ type NumberProps = {
     label: string;
     value: number | null;
     type: "number";
-    onChange: (value: number) => void;
+    onChange: (value: number | null) => void;
 };
 
 type Props = TextProps | NumberProps;
@@ -24,11 +24,14 @@ export default function TextInput({ label, value, type, onChange }: Props) {
             const parsedValue = parseInt(event.target.value, 10);
             if (!isNaN(parsedValue)) {
                 onChange(parsedValue);
+            } else if (event.target.value === "") {
+                onChange(null);
             }
         } else {
             onChange(event.target.value);
         }
     };
+
 
     return (
         <div className={styles["text-input"]}>

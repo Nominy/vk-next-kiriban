@@ -1,0 +1,37 @@
+.group-table-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  width: fit-content;
+
+  table {
+    background-color: #333;
+    border-collapse: collapse;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0;
+    width: max-content;
+    table-layout: fixed;
+    font-size: 14px;
+
+    th {
+      background-color: #444444;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px;
+      text-align: left;
+      border-bottom: 0.2rem solid transparent;
+    }
+
+    td {
+      background-color: #444444;
+      color: #d1d1d1;
+      padding: 10px;
+      text-align: center;
+      border-bottom: 0.2rem solid transparent;
+    }
+
+  }
+
+}
