@@ -10,9 +10,9 @@ type TextProps = {
 
 type NumberProps = {
     label: string;
-    value: number | null;
+    value: number;
     type: "number";
-    onChange: (value: number | null) => void;
+    onChange: (value: number) => void;
 };
 
 type Props = TextProps | NumberProps;
@@ -25,7 +25,7 @@ export default function TextInput({ label, value, type, onChange }: Props) {
             if (!isNaN(parsedValue)) {
                 onChange(parsedValue);
             } else if (event.target.value === "") {
-                onChange(null);
+                onChange(0);
             }
         } else {
             onChange(event.target.value);
@@ -36,7 +36,7 @@ export default function TextInput({ label, value, type, onChange }: Props) {
     return (
         <div className={styles["text-input"]}>
             <label>{label}</label>
-            <input type={type} value={value === null ? "" : value} onChange={handleChange} />
+            <input type={type} value={value === 0 ? "" : value} onChange={handleChange} />
         </div>
     );
 }

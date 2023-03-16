@@ -9,7 +9,7 @@ interface GroupInputProps {
 const GroupInput: React.FC<GroupInputProps> = ({ onSubmit }) => {
     const [inputGroupNameValue, setInputGroupNameValue] = useState("");
     const [inputMembersCountGoal, setInputMembersCountGoal] =
-        useState<number | null>(null);
+        useState<number>(0);
 
     const handleInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
