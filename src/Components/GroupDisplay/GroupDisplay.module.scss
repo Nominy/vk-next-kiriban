@@ -5,8 +5,8 @@
   padding: 16px;
   border-radius: 4px 4px 0 0;
   transition: background-color 0.2s ease-in-out;
-  max-width: var(--view-component-width);
   display: flex;
+  flex: 1 1 auto;
 
   h2 {
     color: #fff;
