@@ -23,7 +23,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ onSubmit }) => {
 
     return (
         <div className={styles["group-input"]}>
-            <form className={styles['groupForm']} onSubmit={handleInputSubmit}>
+            <form onSubmit={handleInputSubmit}>
                     <TextInput
                         label="Enter group name: "
                         type="text"

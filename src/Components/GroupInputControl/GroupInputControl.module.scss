@@ -7,9 +7,10 @@
     justify-self: end;
   }
 
-  & > div:last-child{
+  & > div:last-child {
     display: flex;
     width: max-content;
     flex-direction: column;
+    margin-left: 0.5%;
   }
 }
