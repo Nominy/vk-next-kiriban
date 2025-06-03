@@ -11,7 +11,7 @@ import GroupAddButton from "@/Components/GroupAddButton/GroupAddButtons";
 import styles from "./GroupInputControl.module.scss"
 
 
-function isButtonDisabled(Group: VKGroup, data: Array<VKGroup>): boolean {
+export function isButtonDisabled(Group: VKGroup, data: Array<VKGroup>): boolean {
     const keyEmpty = !Group.key;
     const valueEmpty = !Group.value;
     const valueError = Group.value === "Error";
