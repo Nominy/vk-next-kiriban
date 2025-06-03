@@ -7,7 +7,7 @@ import TextInput from "../TextInput/TextInput";
 import GroupInput from "@/Components/GroupInput/GroupInput";
 import {VK} from "vk-io";
 import GroupDisplay from "@/Components/GroupDisplay/GroupDisplay";
-import GroupAddButton from "@/Components/GroupAddButton/GroupAddButtons";
+import GroupAddButton from "@/Components/GroupAddButton/GroupAddButton";
 import styles from "./GroupInputControl.module.scss"
 
 
