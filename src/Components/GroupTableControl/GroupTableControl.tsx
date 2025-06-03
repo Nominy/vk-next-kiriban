@@ -47,11 +47,12 @@ export const GroupTableControl = () => {
             const newData: Array<VKGroup> = [];
             for (let group of data) {
                 const membersCount = await fetchData(group.key);
-                if (membersCount.value >= group.membersGoal) {
-                    clearInterval(intervalId);
-                    setShowPopup(true);
-                    reachedGroup = group;
-                } else {
+                    if (membersCount.value >= group.membersGoal) {
+                        clearInterval(intervalId);
+                        setIntervalId(null);
+                        setShowPopup(true);
+                        reachedGroup = group;
+                    } else {
                     newData.push({ ...group, value: membersCount.value });
                 }
             }
