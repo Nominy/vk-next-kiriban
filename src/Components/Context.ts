@@ -19,10 +19,9 @@ export const dataContext = createContext<dataContextType>({
     setData: () => {}
 });
 
-export const loopContext = createContext(<loopContextType>({
-        intervalId: null,
-        setIntervalId: () => {},
-        appState: ApplicationState.Disabled,
-        setAppState: () => {}
-    })
-);
+export const loopContext = createContext<loopContextType>({
+    intervalId: null,
+    setIntervalId: () => {},
+    appState: ApplicationState.Disabled,
+    setAppState: () => {},
+});
