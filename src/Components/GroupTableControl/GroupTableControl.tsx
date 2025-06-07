@@ -38,7 +38,6 @@ export const GroupTableControl = () => {
             setAppState(ApplicationState.Enabled);
         else
             setAppState(ApplicationState.Disabled);
-        console.log(intervalId)
     }, [data, intervalId, setAppState, setIntervalId])
     const handleStartLoop = () => {
 
@@ -95,18 +94,24 @@ export const GroupTableControl = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {data.map((item) => (
-                        <tr key={item.key}>
-                            <td>{item.key}</td>
-                            <td>{item.value}</td>
-                            <td>{item.membersGoal}</td>
-                            <td>
-                                <button disabled={Boolean(intervalId)} onClick={() => {
-                                    deleteGroup(item.key)
-                                }}>Delete</button>
-                            </td>
+                    {data.length === 0 ? (
+                        <tr>
+                            <td colSpan={4}>No groups added</td>
                         </tr>
-                    ))}
+                    ) : (
+                        data.map((item) => (
+                            <tr key={item.key}>
+                                <td>{item.key}</td>
+                                <td>{item.value}</td>
+                                <td>{item.membersGoal}</td>
+                                <td>
+                                    <button disabled={Boolean(intervalId)} onClick={() => {
+                                        deleteGroup(item.key)
+                                    }}>Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
                     </tbody>
                 </table>
 

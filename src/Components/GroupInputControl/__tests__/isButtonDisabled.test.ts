@@ -16,6 +16,11 @@ describe('isButtonDisabled', () => {
     expect(isButtonDisabled(group, data)).toBe(true)
   })
 
+  it('duplicate key with different value ⇒ true', () => {
+    const group: VKGroup = { key: 'group1', value: 999, membersGoal: 0 }
+    expect(isButtonDisabled(group, data)).toBe(true)
+  })
+
   it('valid unique group ⇒ false', () => {
     const group: VKGroup = { key: 'group2', value: 456, membersGoal: 0 }
     expect(isButtonDisabled(group, data)).toBe(false)

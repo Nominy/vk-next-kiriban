@@ -31,12 +31,14 @@ const GroupInput: React.FC<GroupInputProps> = ({ onSubmit }) => {
                         onChange={(value: string) => {
                             setInputGroupNameValue(value);
                         }}
+                        placeholder="my_group"
                     />
                     <TextInput
                         label="Enter Members Count goal: "
                         type="number"
                         value={inputMembersCountGoal}
                         onChange={(value: number) => setInputMembersCountGoal(value)}
+                        placeholder="1000"
                     />
                 <button className="group-form__submit" type="submit">Submit</button>
             </form>
