@@ -6,6 +6,7 @@ type TextProps = {
     value: string;
     type: "text";
     onChange: (value: string) => void;
+    placeholder?: string;
 };
 
 type NumberProps = {
@@ -13,11 +14,12 @@ type NumberProps = {
     value: number;
     type: "number";
     onChange: (value: number) => void;
+    placeholder?: string;
 };
 
 type Props = TextProps | NumberProps;
 
-export default function TextInput({ label, value, type, onChange }: Props) {
+export default function TextInput({ label, value, type, onChange, placeholder }: Props) {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         if (type === "number") {
@@ -36,7 +38,12 @@ export default function TextInput({ label, value, type, onChange }: Props) {
     return (
         <div className={styles["text-input"]}>
             <label>{label}</label>
-            <input type={type} value={value === 0 ? "" : value} onChange={handleChange} />
+            <input
+                type={type}
+                value={value === 0 ? "" : value}
+                onChange={handleChange}
+                placeholder={placeholder}
+            />
         </div>
     );
 }
