@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { VKGroup } from "../../../types";
 import { dataContext, loopContext } from "@/Components/Context";
 import { ApplicationState } from "@/Components/LoopButton";
 import { fetchData } from "@/lib/api";
 import TextInput from "../TextInput/TextInput";
 import GroupInput from "@/Components/GroupInput/GroupInput";
-import {VK} from "vk-io";
 import GroupDisplay from "@/Components/GroupDisplay/GroupDisplay";
 import GroupAddButton from "@/Components/GroupAddButton/GroupAddButton";
 import styles from "./GroupInputControl.module.scss"
@@ -16,7 +15,7 @@ export function isButtonDisabled(Group: VKGroup, data: Array<VKGroup>): boolean 
     const valueEmpty = !Group.value;
     const valueError = Group.value === "Error";
     const groupAlreadyThere = data.some(
-        (group) => group.key === Group.key && group.value === Group.value
+        (group) => group.key === Group.key
     );
     return keyEmpty || valueEmpty || valueError || groupAlreadyThere;
 }
@@ -27,6 +26,7 @@ const GroupInputControl = () => {
 
     const [currentGroup, setCurrentGroup] = useState<VKGroup>(initialGroup);
     const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
+    const [formKey, setFormKey] = useState(0);
 
     const { intervalId, setAppState } = useContext(loopContext);
     const { data } = useContext(dataContext);
@@ -42,6 +42,7 @@ const GroupInputControl = () => {
             setCurrentGroup(newGroup);
             setIsAddButtonDisabled(isButtonDisabled(newGroup, data));
         } catch {
+            setCurrentGroup(initialGroup);
             setIsAddButtonDisabled(true);
         }
     };
@@ -53,6 +54,7 @@ const GroupInputControl = () => {
     const handleAddClick = () => {
         setCurrentGroup(initialGroup);
         setIsAddButtonDisabled(true);
+        setFormKey((k) => k + 1);
     };
 
 
@@ -61,7 +63,7 @@ const GroupInputControl = () => {
     return (
         <div className={styles['group-input-control']}>
             <div>
-                <GroupInput onSubmit={handleInputSubmit} />
+                <GroupInput key={formKey} onSubmit={handleInputSubmit} />
             </div>
             <div className={styles.test}>
                 <GroupDisplay group={currentGroup}/>

@@ -1,7 +1,6 @@
 import { VKGroup } from "../../../types";
 import React from "react";
 import styles from './GroupDisplay.module.scss';
-import {VK} from "vk-io";
 
 interface GroupDisplayProps {
     group: VKGroup;
@@ -11,7 +10,8 @@ const GroupDisplay: React.FC<GroupDisplayProps> = ({ group }) => {
 
     function isGroupValid(group: VKGroup) {
         for (const key in group) {
-            if (!group[key]) {
+            const value = group[key];
+            if (value === undefined || value === '') {
                 return false;
             }
         }
